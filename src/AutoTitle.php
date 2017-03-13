@@ -235,9 +235,10 @@ class AutoTitle implements AutoTitleInterface {
     $entity_type = $entity->getEntityType()->id();
     $output = $this->token
         ->replace($pattern, array($entity_type => $entity), array(
-        'sanitize' => FALSE,
         'clear' => TRUE
       ));
+    
+    $output = PlainTextOutput::renderFromHtml($output);
 
     // Evaluate PHP.
     if ($this->getConfig('php')) {
